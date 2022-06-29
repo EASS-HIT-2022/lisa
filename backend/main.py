@@ -32,7 +32,7 @@ def create_event(event: EventSchema):
     return {"data": "event created."}
 
 
-@app.post("/user/signup", tags=["user"])
+@app.post("/auth/signup", tags=["auth"])
 async def create_user(user: UserSchema = Body(...)):
     try:
         handlers.create_user(user)
@@ -42,7 +42,7 @@ async def create_user(user: UserSchema = Body(...)):
     return sign_jwt(user.email)
 
 
-@app.post("/user/login", tags=["user"])
+@app.post("/auth/login", tags=["auth"])
 async def user_login(user: UserLoginSchema = Body(...)):
     if not handlers.is_user_exists(user):
         raise HTTPException(status_code=400, detail="Incorrect username or password")

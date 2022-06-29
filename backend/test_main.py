@@ -1,9 +1,9 @@
 import json
 from datetime import date
 import pytest
-import app.handlers as handlers
-from app.model import UserLoginSchema, UserSchema, EventSchema
-from app.database.mongo import MongoDBManager
+import backend.app.handlers as handlers
+from backend.app.model import UserLoginSchema, UserSchema
+from backend.app.database.mongo import MongoDBManager
 from fastapi.testclient import TestClient
 from main import app
 

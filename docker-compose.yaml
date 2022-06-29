@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
+    links:
+      - "mongodb:database"
+    ports:
+      - "8000:80"
+    env_file:
+      - backend/.env.prod
+
+  validator:
+    build:
+      dockerfile: Dockerfile
+      context: ./validator
+    links:
+      - "mongodb:database"
+    env_file:
+      - validator/.env.prod
+
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    links:
+      - "backend:backend"
+    ports:
+      - "3000:3000"
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
